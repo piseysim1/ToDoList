@@ -12,12 +12,13 @@ class StartView extends GetView<StartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('StartView'), centerTitle: true),
+      extendBodyBehindAppBar: true,
+      
       body: Stack(
         children: [
           // Background Gradient Glow
           Positioned(
-            top: -100,
+            top: 0,
             right: -50,
             child: Container(
               width: 300,
@@ -28,32 +29,51 @@ class StartView extends GetView<StartController> {
               ),
             ),
           ),
-
+          Positioned(
+            top: 0,
+            left: 20,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF83C78F).withOpacity(0.1),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 200,
+            left: 20,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color.fromARGB(255, 146, 59, 172).withOpacity(0.1),
+              ),
+            ),
+          ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(),
-
-                  // Image Placeholder
-                  // Replace with: Image.asset('assets/onboarding_image.png')
                   Center(
                     child: Container(
-                      height: 350,
+                      height: 200,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://placeholder.com/350',
+                          image: AssetImage(
+                            'assets/images/female sitting on the floor with cup in hand and laptop on leg.png',
                           ), // Replace with your image
                           fit: BoxFit.contain,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 10),
                   // Heading
                   Text(
                     "Task Management &\nTo-Do List",
@@ -75,38 +95,22 @@ class StartView extends GetView<StartController> {
                       height: 1.5,
                     ),
                   ),
-                  const Spacer(),
                   // Let's Start Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to next screen
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6338E1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        elevation: 10,
-                        shadowColor: const Color(0xFF6338E1).withOpacity(0.4),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ButtonText(
-                            BGbotton: mainColor,
-                            buttonName: "Let’s Start",
-                            onPressed: () {
-                              Get.toNamed(Routes.LOGIN);
-                            },
-                          ),
-                        ],
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: SizedBox(
+                      width: 250,
+                      height: 50,
+                      child: ButtonText(
+                        buttonName: "Let's Start",
+                        BGbotton: const Color(0xFF6338E1),
+                        onPressed: () {
+                          Get.toNamed(Routes.LOGIN);
+                        },
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
                 ],
               ),
             ),

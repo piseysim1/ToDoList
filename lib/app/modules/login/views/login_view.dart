@@ -15,7 +15,18 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('LoginView'), centerTitle: true),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          color: Colors.black,
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor : Colors.transparent,
+        centerTitle: true,
+        elevation: 0,
+        title: null,
+      ),
       body: Stack(
         children: [
           // 1. Base background
@@ -96,38 +107,16 @@ class LoginView extends GetView<LoginController> {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SizedBox(
+                  width: 120,
                   height: 50,
-                  width: 100,
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to next screen
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6338E1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        elevation: 10,
-                        shadowColor: const Color(0xFF6338E1).withOpacity(0.4),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ButtonText(
-                            BGbotton: mainColor,
-                            buttonName: "Login",
-                            onPressed: () {
-                              Get.toNamed(Routes.HOME);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                  child: ButtonText(
+                    buttonName: "Login",
+                    BGbotton: const Color(0xFF6338E1),
+                    onPressed: () {
+                      Get.toNamed(Routes.HOME);
+                    },
                   ),
                 ),
               ),

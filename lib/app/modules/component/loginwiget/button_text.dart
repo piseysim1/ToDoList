@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_app/app/core/theme/theme.dart';
 
 class ButtonText extends StatelessWidget {
   const ButtonText({
@@ -15,11 +16,15 @@ class ButtonText extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        // padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: BGbotton,
+        foregroundColor: whiteColor,
+        backgroundColor: const Color(0xFF6338E1),
+        shape: StadiumBorder(),
+        elevation: 10,
+        shadowColor: const Color(0xFF6338E1).withOpacity(0.4),
+        
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             buttonName ?? "Button",

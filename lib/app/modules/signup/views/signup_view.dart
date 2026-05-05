@@ -16,8 +16,19 @@ class SignupView extends GetView<SignupController> {
   const SignupView({super.key});
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      appBar: AppBar(title: const Text('SignupView'), centerTitle: true),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: Colors.transparent,
+        title: null,
+        elevation: 0,
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
           // 1. Base background
@@ -99,38 +110,16 @@ class SignupView extends GetView<SignupController> {
               const SizedBox(height: 20),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SizedBox(
+                  width: 120,
                   height: 50,
-                  width: 100,
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to next screen
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6338E1),
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(20),
-                        // ),
-                        // elevation: 10,
-                        // shadowColor: const Color(0xFF6338E1).withOpacity(0.4),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ButtonText(
-                            BGbotton: mainColor,
-                            buttonName: "Sign Up",
-                            onPressed: () {
-                              Get.toNamed(Routes.HOME);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                  child: ButtonText(
+                    buttonName: "SingUp",
+                    BGbotton: const Color(0xFF6338E1),
+                    onPressed: () {
+                      Get.toNamed(Routes.LOGIN);
+                    },
                   ),
                 ),
               ),
