@@ -6,11 +6,11 @@ import 'package:todolist_app/app/modules/add_projecttask/controllers/add_project
 import 'package:todolist_app/app/modules/component/homewiget/titleheader.dart';
 import 'package:todolist_app/app/modules/component/project-add-widget/containerproject_widget.dart';
 import 'package:todolist_app/app/modules/component/project-add-widget/datecontainer.dart';
+import 'package:todolist_app/app/modules/component/project-add-widget/list_task.dart';
 import 'package:todolist_app/app/modules/component/project-add-widget/task_groundcontainer.dart';
 
 class AddProjecttaskView extends GetView<AddProjecttaskController> {
   const AddProjecttaskView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,17 +32,11 @@ class AddProjecttaskView extends GetView<AddProjecttaskController> {
     );
   }
 
-  // --- Helper Widgets to keep code clean ---
-
   Widget _buildAppBarTitle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          icon: Icon(Icons.arrow_back, color: blackColor),
-          onPressed: () => Get.back(),
-        ),
-        const Text(
+        Text(
           "Add Project",
           style: TextStyle(
             fontSize: 24,
@@ -122,12 +116,11 @@ class AddProjecttaskView extends GetView<AddProjecttaskController> {
         ),
         const SizedBox(height: 10),
         Titleheader(lable_text: 'All Task '),
-        // TasklistScreen(),
+        ListTask(),
         const SizedBox(height: 20),
       ],
     );
   }
-
   void _showAddTaskSheet(BuildContext context) {
     Get.bottomSheet(
       Container(
@@ -164,8 +157,7 @@ class AddProjecttaskView extends GetView<AddProjecttaskController> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                onPressed: () {},
-                // onPressed: () => controller.saveTask(),
+                onPressed: () => controller.SaveTask(),
                 child: const Text(
                   "Add",
                   style: TextStyle(color: Colors.white, fontSize: 18),

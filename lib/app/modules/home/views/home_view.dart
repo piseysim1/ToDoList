@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todolist_app/app/core/theme/theme.dart';
 import 'package:todolist_app/app/modules/component/homewiget/project_card.dart';
 import 'package:todolist_app/app/modules/component/homewiget/task_card.dart';
 import 'package:todolist_app/app/modules/component/homewiget/taskproject.dart';
 import 'package:todolist_app/app/modules/component/homewiget/titleheader.dart';
+import 'package:todolist_app/app/routes/app_pages.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -43,10 +45,11 @@ class HomeView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: () {
-              print("Notifications clicked");
+              // print("Notifications clicked");
+            Get.toNamed(Routes.ADD_PROJECTTASK);
             },
           ),
-          const SizedBox(width: 8), // Small padding from the edge
+          const SizedBox(width: 8),
         ],
         // ------------------------
       ),
