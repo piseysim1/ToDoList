@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Taskproject extends StatelessWidget {
+class TaskGroupcontainer extends StatelessWidget {
   final String title;
   final String subTitle;
   final IconData iconTaskgroup;
@@ -9,8 +9,7 @@ class Taskproject extends StatelessWidget {
   final double values;
   final Color valuesColor;
   final Color bgvalues;
-  final String textPercent;
-  const Taskproject({
+  const TaskGroupcontainer({
     super.key,
     required this.bgvalues,
     required this.title,
@@ -20,18 +19,14 @@ class Taskproject extends StatelessWidget {
     required this.iconColor,
     required this.values,
     required this.valuesColor,
-    required this.textPercent,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.blue.shade400, width: 2),
+        borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
         children: [
@@ -41,7 +36,7 @@ class Taskproject extends StatelessWidget {
               color: bgIcon,
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Icon(iconTaskgroup, color: iconColor, size: 30),
+            child: Icon(iconTaskgroup, color: iconColor, size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -51,34 +46,12 @@ class Taskproject extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 60,
-            width: 60,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CircularProgressIndicator(
-                  value: values,
-                  strokeWidth: 6,
-                  backgroundColor: bgvalues,
-                  valueColor: AlwaysStoppedAnimation<Color>(valuesColor),
-                ),
-                Text(
-                  textPercent,
                   style: TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProjectCard extends StatelessWidget {
   final String category;
   final String title;
-  final double progress; // Value between 0.0 and 1.0
+  final double progress;
   final Color backgroundColor;
   final Color progressColor;
   final IconData icon;
@@ -31,7 +31,6 @@ class ProjectCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Top Row: Category Label and Icon
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -53,7 +52,6 @@ class ProjectCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          // Project Title
           Text(
             title,
             style: const TextStyle(
@@ -63,7 +61,6 @@ class ProjectCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          // Progress Bar
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: LinearProgressIndicator(

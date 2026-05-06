@@ -15,7 +15,6 @@ class ContainerImage extends StatelessWidget {
     return Container(
       width: width + 20,
       height: height + 25,
-      // padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(10),
@@ -23,7 +22,6 @@ class ContainerImage extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
-            // spreadRadius: 2,
             blurRadius: 24,
             offset: Offset(0, 3), // changes position of shadow
           ),

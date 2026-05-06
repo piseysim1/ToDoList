@@ -8,12 +8,11 @@ class TaskCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF6A3DE8), // Deep purple color
+        color: const Color(0xFF6A3DE8),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Stack(
         children: [
-          // 1. Top Right Menu Button
           Positioned(
             right: 0,
             top: 0,
@@ -26,8 +25,6 @@ class TaskCard extends StatelessWidget {
               child: const Icon(Icons.more_horiz, color: Colors.white, size: 20),
             ),
           ),
-          
-          // 2. Main Content
           Row(
             children: [
               Expanded(
