@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/add_projecttask_controller.dart';
+import '../controllers/td_controller/add_projecttask_controller.dart';
 
 class AddProjecttaskBinding extends Bindings {
   @override

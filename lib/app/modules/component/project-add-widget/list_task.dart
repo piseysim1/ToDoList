@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist_app/app/controllers/task_controller.dart';
+import 'package:todolist_app/app/controllers/td_controller/task_controller.dart';
 import 'package:todolist_app/app/data/models/taskModel.model.dart';
 
 class ListTask extends StatelessWidget {

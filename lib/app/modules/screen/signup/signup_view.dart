@@ -10,7 +10,7 @@ import 'package:todolist_app/app/modules/component/loginwiget/container_image.da
 import 'package:todolist_app/app/modules/component/loginwiget/input_form.dart';
 import 'package:todolist_app/app/routes/app_pages.dart';
 
-import '../controllers/signup_controller.dart';
+import '../../../controllers/td_controller/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
   const SignupView({super.key});

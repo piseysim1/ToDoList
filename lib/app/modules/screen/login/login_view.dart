@@ -8,7 +8,7 @@ import 'package:todolist_app/app/modules/component/loginwiget/container_image.da
 import 'package:todolist_app/app/modules/component/loginwiget/input_form.dart';
 import 'package:todolist_app/app/routes/app_pages.dart';
 
-import '../controllers/login_controller.dart';
+import '../../../controllers/td_controller/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});

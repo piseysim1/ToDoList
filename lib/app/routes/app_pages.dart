@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 
-import '../modules/add_projecttask/bindings/add_projecttask_binding.dart';
-import '../modules/add_projecttask/views/add_projecttask_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
-import '../modules/start/bindings/start_binding.dart';
-import '../modules/start/views/start_view.dart';
-import '../modules/todaytask/bindings/todaytask_binding.dart';
-import '../modules/todaytask/views/todaytask_view.dart';
+import '../bindings/add_projecttask_binding.dart';
+import '../modules/screen/add_projecttask/add_projecttask_view.dart';
+import '../bindings/home_binding.dart';
+import '../modules/screen/home/home_view.dart';
+import '../bindings/login_binding.dart';
+import '../modules/screen/login/login_view.dart';
+import '../bindings/signup_binding.dart';
+import '../modules/screen/signup/signup_view.dart';
+import '../bindings/start_binding.dart';
+import '../modules/screen/start/start_view.dart';
+import '../bindings/todaytask_binding.dart';
+import '../modules/screen/todaytask/todaytask_view.dart';
 
 part 'app_routes.dart';
 

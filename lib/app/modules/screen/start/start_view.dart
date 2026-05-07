@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:todolist_app/app/core/theme/theme.dart';
 import 'package:todolist_app/app/modules/component/loginwiget/button_text.dart';
 import 'package:todolist_app/app/routes/app_pages.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../controllers/start_controller.dart';
+import '../../../controllers/td_controller/start_controller.dart';
 
 class StartView extends GetView<StartController> {
   const StartView({super.key});
@@ -16,7 +14,6 @@ class StartView extends GetView<StartController> {
       
       body: Stack(
         children: [
-          // Background Gradient Glow
           Positioned(
             top: 0,
             right: -50,
