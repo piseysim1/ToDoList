@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist_app/app/Screen/components/homewidget/taskProject.dart';
-import 'package:todolist_app/app/core/theme/theme.dart';
-import 'package:todolist_app/app/Screen/components/homewidget/project_card.dart';
+import 'package:todolist_app/app/Screen/components/homewidget/in_progress_section.dart';
 import 'package:todolist_app/app/Screen/components/homewidget/task_card.dart';
+import 'package:todolist_app/app/Screen/components/homewidget/task_groups_section.dart';
 import 'package:todolist_app/app/Screen/components/homewidget/titleheader.dart';
+import 'package:todolist_app/app/controllers/td_controller/todaytask_controller.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<TodaytaskController> {
   const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,88 +47,17 @@ class HomeView extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: EdgeInsets.only(right: 16, left: 16),
-        children: [
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        children: const [
           TaskCard(),
-          SizedBox(width: 10, height: 20),
+          SizedBox(height: 20),
           Titleheader(lable_text: "In Progress"),
           SizedBox(height: 20),
-          SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          clipBehavior: Clip.none,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ProjectCard(
-                  category: 'Office Project',
-                  title: 'Grocery shopping app design',
-                  progress: 0.6,
-                  backgroundColor: bluelight,
-                  progressColor: blue50,
-                  icon: Icons.work,
-                ),
-                SizedBox(width: 20),
-                ProjectCard(
-                  category: 'Personal Project',
-                  title: 'Uber Eats redesign challange',
-                  progress: 0.6,
-                  backgroundColor: pinklight,
-                  progressColor: orange50,
-                  icon: Icons.person,
-                ),
-              ],
-            ),
-          ),
-          // SizedBox(width: 10, height: 20),
+          InProgressSection(),
+          SizedBox(height: 20),
           Titleheader(lable_text: "Task Groups"),
           SizedBox(height: 20),
-          Taskproject(
-            bgvalues: pinklight,
-            title: 'Office Project',
-            subTitle: '23 Tasks',
-            iconTaskgroup: Icons.business_center,
-            bgIcon: pink60,
-            iconColor: pink80,
-            values: 0.6,
-            valuesColor: pink80,
-            textPercent: '70%',
-          ),
-          SizedBox(height: 30),
-          Taskproject(
-            bgvalues: purple20,
-            title: 'Personal Project',
-            subTitle: '30 Tasks',
-            iconTaskgroup: Icons.account_box,
-            bgIcon: purple20,
-            iconColor: purple50,
-            values: 0.3,
-            valuesColor: purple50,
-            textPercent: '52%',
-          ),
-          SizedBox(height: 30),
-          Taskproject(
-            bgvalues: orangelight,
-            title: 'Daily Study',
-            subTitle: '30 Tasks',
-            iconTaskgroup: Icons.auto_stories,
-            bgIcon: orangelight,
-            iconColor: orange50,
-            values: 0.9,
-            valuesColor: orange50,
-            textPercent: '82%',
-          ),
-          SizedBox(height: 30),
-          Taskproject(
-            bgvalues: yellowlight,
-            title: 'Daily Study',
-            subTitle: '3 Tasks',
-            iconTaskgroup: Icons.auto_stories,
-            bgIcon: yellowlight,
-            iconColor: yellow50,
-            values: 0.9,
-            valuesColor: yellow50,
-            textPercent: '87%',
-          ),
+          TaskGroupsSection(),
         ],
       ),
     );

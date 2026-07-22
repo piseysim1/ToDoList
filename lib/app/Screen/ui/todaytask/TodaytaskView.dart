@@ -59,7 +59,7 @@ class TodaytaskView extends GetView<TodaytaskController> {
                   itemBuilder: (context, index) {
                     final task = filteredTasks[index];
                     
-                    // Swipe-to-delete action wrapper
+                
                     return Dismissible(
                       key: Key(task.id),
                       direction: DismissDirection.endToStart,
@@ -198,10 +198,10 @@ class TodaytaskView extends GetView<TodaytaskController> {
                   ),
                 ),
 
-                // Interactive Complete / Toggle Button
+             
                 GestureDetector(
                   onTap: () {
-                    // Toggle status between 'Done' and previous status
+                  
                     final newStatus = isDone ? 'To-do' : 'Done';
                     final updatedTask = TaskModel(
                       id: task.id,

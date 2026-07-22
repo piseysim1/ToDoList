@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todolist_app/app/Screen/components/today-task-widget/card_container.dart';
+import 'package:todolist_app/app/Screen/ui/add_projecttask/components/add_subtask_dialog.dart';
 import 'package:todolist_app/app/Screen/ui/todaytask/components/aurora_background.dart';
 import 'package:todolist_app/app/controllers/td_controller/todaytask_controller.dart';
 import 'package:todolist_app/app/data/models/taskModel.model.dart';
-
-class SubTaskItem {
-  String title;
-  bool isCompleted;
-
-  SubTaskItem({required this.title, this.isCompleted = false});
-}
+import 'package:todolist_app/app/data/models/sub_task_item.model.dart';
 
 class AddProjecttaskView extends StatefulWidget {
   const AddProjecttaskView({super.key});
@@ -32,10 +28,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
   TaskModel? existingTask;
   bool isEditMode = false;
 
-  // List to hold multiple tasks under "All Task"
-  List<SubTaskItem> subTaskList = [
-    SubTaskItem(title: 'Buy Cafe at Brown cafe'),
-  ];
+  List<SubTaskItem> subTaskList = [];
 
   @override
   void initState() {
@@ -48,57 +41,23 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
       titleController.text = existingTask!.title;
       descriptionController.text = existingTask!.category;
       selectedTaskGroup = existingTask!.status;
+      subTaskList = existingTask!.subTasks
+          .map((t) => SubTaskItem(title: t.title, isCompleted: t.isCompleted))
+          .toList();
     }
   }
 
-  void _showAddSubTaskDialog() {
-    final subTaskTextController = TextEditingController();
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
-    Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text(
-          'Add New Task',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        content: TextField(
-          controller: subTaskTextController,
-          autofocus: true,
-          decoration: InputDecoration(
-            hintText: 'Enter task title...',
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF6338E1), width: 2),
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6338E1),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            onPressed: () {
-              if (subTaskTextController.text.trim().isNotEmpty) {
-                setState(() {
-                  subTaskList.add(
-                    SubTaskItem(title: subTaskTextController.text.trim()),
-                  );
-                });
-                Get.back();
-              }
-            },
-            child: const Text('Add', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
+  void _showAddSubTaskDialog() {
+    AddSubtaskDialog.show(
+      subTaskList: subTaskList,
+      onChanged: () => setState(() {}),
     );
   }
 
@@ -121,6 +80,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
         time: DateFormat('hh:mm a').format(startDate),
         status: selectedTaskGroup,
         date: startDate,
+        subTasks: subTaskList,
       );
       controller.updateTask(updated);
     } else {
@@ -131,6 +91,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
         time: DateFormat('hh:mm a').format(startDate),
         status: selectedTaskGroup,
         date: startDate,
+        subTasks: subTaskList,
       );
       controller.addTask(newTask);
     }
@@ -207,9 +168,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-
-              // 1. Task Group Card
-              _buildCardContainer(
+              CardContainer(
                 child: Row(
                   children: [
                     Container(
@@ -275,9 +234,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
               ),
 
               const SizedBox(height: 16),
-
-              // 2. Project Name Card
-              _buildCardContainer(
+              CardContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -295,7 +252,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
                         isDense: true,
                         contentPadding: EdgeInsets.only(top: 6),
                         border: InputBorder.none,
-                        hintText: 'Grocery Shopping App',
+                        hintText: 'Grocery Shopping',
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.normal,
@@ -309,7 +266,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
               const SizedBox(height: 16),
 
               // 3. Description Card
-              _buildCardContainer(
+              CardContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -331,7 +288,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
                         contentPadding: EdgeInsets.zero,
                         border: InputBorder.none,
                         hintText:
-                            'This application is designed for super shops...',
+                            'description your task here...',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
@@ -340,11 +297,9 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
               ),
 
               const SizedBox(height: 16),
-
-              // 4. Start Date Card
               GestureDetector(
                 onTap: () => _selectDate(context, true),
-                child: _buildCardContainer(
+                child: CardContainer(
                   child: Row(
                     children: [
                       Container(
@@ -390,10 +345,9 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
 
               const SizedBox(height: 16),
 
-              // 5. End Date Card
               GestureDetector(
                 onTap: () => _selectDate(context, false),
-                child: _buildCardContainer(
+                child: CardContainer(
                   child: Row(
                     children: [
                       Container(
@@ -439,7 +393,6 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
 
               const SizedBox(height: 24),
 
-              // 6. "All Task" Header Section
               const Text(
                 'All Task',
                 style: TextStyle(
@@ -450,7 +403,6 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
               ),
               const SizedBox(height: 12),
 
-              // Dynamic List of Tasks
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -459,7 +411,7 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
                   final item = subTaskList[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
-                    child: _buildCardContainer(
+                    child: CardContainer(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -517,8 +469,6 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
               ),
 
               const SizedBox(height: 8),
-
-              // Floating Square Plus Button to Add New Tasks (Right aligned as in design image)
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
@@ -544,7 +494,6 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
 
               const SizedBox(height: 30),
 
-              // 7. Add / Update Project Button
               SizedBox(
                 width: double.infinity,
                 height: 52,
@@ -575,22 +524,22 @@ class _AddProjecttaskViewState extends State<AddProjecttaskView> {
     );
   }
 
-  Widget _buildCardContainer({required Widget child}) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
+  // Widget _buildCardContainer({required Widget child}) {
+  //   return Container(
+  //     width: double.infinity,
+  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(20),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.02),
+  //           blurRadius: 10,
+  //           offset: const Offset(0, 4),
+  //         ),
+  //       ],
+  //     ),
+  //     child: child,
+  //   );
+  // }
 }
