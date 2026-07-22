@@ -1,9 +1,38 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:todolist_app/app/routes/app_pages.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final fullnameController = TextEditingController();
+  final box = GetStorage();
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
 
-  final count = 0.obs;
+  void regsiterUser() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar("Erorr", "Please fil is all fields");
+      return;
+    }
+    box.write('registered_email', email);
+    box.write('registered_password', password);
+    Get.snackbar(
+      "Success",
+      "Account created! Please log in",
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
+    Get.offNamed(Routes.LOGIN);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -13,11 +42,4 @@ class SignupController extends GetxController {
   void onReady() {
     super.onReady();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -1,11 +1,17 @@
-
 class TaskModel {
-  String name;
-  String? description;
-  bool isCompleted;
+  String id;
+  String title;
+  String category;
+  String time;
+  String status; 
+  DateTime date;
+
   TaskModel({
-    required this.name,
-    this.description,
-    this.isCompleted = false,
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.time,
+    required this.status,
+    required this.date,
   });
 }
